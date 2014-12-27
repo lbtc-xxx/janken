@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+</h:head>
+<h:body>
+    <h1>JSFじゃんけん</h1>
+    <h:form>
+        <h:panelGrid columns="2">
+            <h:outputText value="あなたの手："/>
+            <h:outputText value="#{jankenView.playerHand.label}" id="playerHand"/>
+            <h:outputText value="相手の手："/>
+            <h:outputText value="#{jankenView.opponentHand.label}" id="opponentHand"/>
+            <h:outputText value="結果："/>
+            <h:outputText value="#{jankenView.result.label}" id="result"/>
+        </h:panelGrid>
+
+        <hr/>
+
+        何を出しますか？
+        <h:panelGrid columns="3">
+            <f:ajax render="playerHand opponentHand result score straightWins highScore straightWinsRecord wins losses draws">
+                <h:commandButton actionListener="#{jankenRequest.deal('ROCK')}" value="ぐー"/>
+                <h:commandButton actionListener="#{jankenRequest.deal('SCISSORS')}" value="ちょき"/>
+                <h:commandButton actionListener="#{jankenRequest.deal('PAPER')}" value="ぱー"/>
+            </f:ajax>
+        </h:panelGrid>
+
+        <hr/>
+
+        【あなたの記録】
+        <h:panelGrid columns="2">
+            <h:outputText value="勝ち数："/>
+            <h:outputText value="#{jankenView.wins}" id="wins"/>
+            <h:outputText value="負け数："/>
+            <h:outputText value="#{jankenView.losses}" id="losses"/>
+            <h:outputText value="引き分け："/>
+            <h:outputText value="#{jankenView.draws}" id="draws"/>
+            <h:outputText value="スコア："/>
+            <h:outputText value="#{jankenView.score}" id="score"/>
+            <h:outputText value="連勝数："/>
+            <h:outputText value="#{jankenView.straightWins}" id="straightWins"/>
+        </h:panelGrid>
+
+        <hr/>
+
+        【これまでの記録】
+        <h:panelGrid columns="2">
+            <h:outputText value="ハイスコア："/>
+            <h:outputText value="#{jankenStreaksManager.highScore}" id="highScore"/>
+            <h:outputText value="連勝記録："/>
+            <h:outputText value="#{jankenStreaksManager.straightWins}" id="straightWinsRecord"/>
+        </h:panelGrid>
+
+    </h:form>
+</h:body>
+</html>
